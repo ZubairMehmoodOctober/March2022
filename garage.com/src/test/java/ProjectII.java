@@ -1,19 +1,25 @@
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.testng.annotations.Test;
 
 public class ProjectII {
 
+	private static final boolean False = false;
+
 	@Test
 	public void compare() {
 		int a = 2;
-		int b = 3;
-		int c=  5;
-		int result = a+b;
+		int b = 2;
+		boolean False;
+		 False = a==b;
 
-		assertEquals (c,result);
+		assertFalse (False,"content of variables should not be equal");
 	}
-
 
 	@Test
 	public void compareReferenceTypes () {
@@ -23,17 +29,10 @@ public class ProjectII {
 
 		if ( s1==s2);{
 
-			assertEquals (true, true);
+			assertTrue (true, "As it compares memory location");
 
 
 		}
-
-
-
-
-
-
-
 
 	}
 
@@ -45,68 +44,67 @@ public class ProjectII {
 		String b = new String("Apple");
 
 		if (a.equals(b)) {
-			assertequals (true,true);
+			assertTrue (true,"As it use for content comparison");
 		}
-	}
-
-
-	private void assertequals(boolean b, boolean c) {
-
-
+	
 	}
 
 	@Test
 
 	public void AndOperator () {
+		
 
-		int a = 5;
-		int b = 5;
-		int c = 10;	   
+		final boolean TRUE = true;
+		final boolean FALSE = false;
 
-		if( (a+b== c) &&( c== a+b));
+		boolean resultOfTrueAndTrue = TRUE && TRUE;
+		boolean resultOfFalseAndFalse = FALSE && FALSE;
+		boolean resultOfTrueAndFalse = TRUE && FALSE;
 
-		assertEquals (true,true);
-
-
-
-
+		assertEquals(resultOfTrueAndTrue, "true && true values should be true.");
+		assertEquals(resultOfFalseAndFalse, "true && false values should be false.");
+		assertEquals(resultOfTrueAndFalse, "true && false values should be false.");
+		  
 	}
 
 	@Test
 
 	public void OrOperator () {
+		
+		final boolean TRUE = true;
+		final boolean FALSE = false;
 
-		int a =3;
-		boolean b=true;
+		boolean resultOfTrueOrTrue = TRUE || TRUE;
+		boolean resultOfTrueOrFalse = TRUE || FALSE;
+		boolean resultOfFalseOrFalse = FALSE || FALSE;
 
-
-		if ((a==4) || (b==true) );
-
-		assertEquals (true,true);
+		assertEquals(resultOfTrueOrTrue, "true || true values should be true.");
+		assertEquals(resultOfTrueOrFalse, "true || false values should be true.");
+		assertEquals(resultOfFalseOrFalse, "false || false values should be false.");
 	}
 
 	@Test
 
-	public void indde() {
+	public void PostUnary () {
 
+		int one = 1;
+		int expectedValue = 1;
 
-		int a;
-		int b;
-		int c;
-		int result=20;
+		int result = one++;
 
-		a=10;
-		a++;
-		b=10;
-		--b;
-		c= a+b;
-
-		System.out.println (c);
-
-		assertEquals (c,result);
-
+		assertEquals(result, expectedValue, "the number should be incremented after getting the value.");
+		
+		
 	}
+   @ Test
+   public void Preunary () {
+	   int one = 1;
+		int expectedValue = 0;
 
+		int result = --one;
+
+		assertEquals(result, expectedValue, "the number should be decremented before getting the value.");
+   }
 
 
 	@Test
@@ -119,46 +117,68 @@ public class ProjectII {
 
 		if( !(a+b== c) &&( d== true));
 
-		assertEquals (false,false);
+		assertEquals(false,false);
 	}
 
 	@Test
 
 	public void TwoIf () {
-		int temp = 98;
-		boolean sunny = true;
 
-		if (temp > 90 ) 
-			System.out.println ("it is hot outside");
-		if (sunny == true)
-			System.out.println ("It is also sunny");
-		assertEquals (true,true);
+		boolean isTrue = true;
+		boolean isFalse = false;
+		boolean didFirstDecisionExecute = false;
+		boolean didSecondDecisionExecute = false;
+
+		if(isTrue) {
+			didFirstDecisionExecute = true;
+		}
+		if(isFalse) {
+			didSecondDecisionExecute = true;
+		}
+
+		assertTrue(didFirstDecisionExecute, "the first decision statement should be executed.");
+		assertFalse(didSecondDecisionExecute, "the second decision statement should not be executed.");
 	}
+
+
 	@Test 
 	public void IfElse () {
+   
+		boolean didFirstDecisionExecute = false;
+		boolean didSecondDecisionExecute = false;
 
-		String word = "found word";
-		String word1 = "we have not found the word";
-		if (word.contains ("river")) {
-			System.out.println ("we have found the word");
+		if(False) {
+			didFirstDecisionExecute = true;
 		}
-
 		else {
-			System.out.println ("we have not found the word");
-
+			didSecondDecisionExecute = true;
 		}
+
+		assertFalse(didFirstDecisionExecute, "the first decision statement should be executed.");
+		assertTrue(didSecondDecisionExecute, "the second decision statement should not be executed.");
 
 
 	}
 	@Test
 	public void NestedLoop ( ) {
-		int t=1;
-		int result=1;
-		for (int i=1;i<=1;i++);
-		for (int j=1;j<=2;j++ );{
-			System.out.println (t+ " ");
+		int loopCounter = 0;
+		int loopLimit = 10;
+		int nestedLoopCounter = 0;
+		int nestedLoopLimit = 20;
+
+		int expectedLoopCount = loopLimit;
+		int expectedNestedLoopCount = loopLimit * nestedLoopLimit;
+
+		for(int i = 0; i < loopLimit; i++) {
+			loopCounter++;
+
+			for(int j = 0; j < nestedLoopLimit; j++) {
+				nestedLoopCounter++;
+			}
 		}
-		assertEquals (t,result);
+
+		assertEquals(loopCounter, expectedLoopCount, "outer loop should iterate up to the limit.");
+		assertEquals(nestedLoopCounter, expectedNestedLoopCount, "nested loop should iterate to the nested loop limit for each outer loop iteration.");
 	}
 
 
@@ -166,32 +186,35 @@ public class ProjectII {
 
 	public void TryException () {
 
-		int a =5;
-		int b=0;
-		int c ;
-		String d = "cant divide by zero";
+		boolean doesThrowException = false;
+
 		try {
-			c= a/b;
+			throw new UnsupportedOperationException();
 		}
-		catch (Exception e){
-			System.out.println ("cant divide by zero");
+		catch (UnsupportedOperationException ex) {
+			doesThrowException = true;
 		}
 
-
+		assertTrue(doesThrowException, "the exception should be caught.");
+		
 	}
 
 	@Test
 
 	public void ForEach () {
-		String [] Cars = {"BMW","Ferrai","Dodge"};
-		String [] result = {"BMW","Ferrai","Dodge"};
-		for (String Car : Cars) {
-			System.out.println ( Car);
-		}
-		assertEquals  (result, Cars);
+		List <String> cars = new ArrayList<String>();
+		List<String> newcars = new ArrayList<String>();
+		newcars.add("BMW");
+		newcars.add("Dodge");
+		newcars.add("Ferrai");
+		 for (String car1:newcars) {
+	             cars.add(car1);
+	
 
 	}
+		 assertEquals(cars,newcars, "should go through each item");
 }
+	
 
 
-
+}
